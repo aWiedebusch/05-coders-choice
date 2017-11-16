@@ -1,36 +1,60 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}", name: "Phoenix!" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
+<div class="panel-group">
+  <div class="col-lg-6 panel panel-info">
+    <div class="panel-heading">
+      <h4>Game Rooms</h4>
+    </div>
+    <div class="panel-body">
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Room Name</th>
+            <th>Game</th>
+            <th>Open?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Example1</td>
+            <td>Checkers</td>
+            <td>No</td>
+            <td><%= submit "Join"%></td>
+          </tr>
+          <tr>
+            <td>Example2</td>
+            <td>Chess</td>
+            <td>Yes</td>
+            <td><%= submit "Join"%></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
   </div>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
-    <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
-    </ul>
+  <div class="col-lg-6 panel panel-info">
+    <div class="panel-heading">
+      <h4>Create your own Game</h4>
+    </div>
+    <div class="panel-body">
+      <%= form_for(@conn, page_path(@conn, :create), [as: :room], fn form -> %>
+      <div class="form-group">
+        
+      <label for="name" > Room Name</label>
+      <%= text_input form, :name, id: :name, class: "form-control", placeholder: "Creative Room Name" %><br>
+
+      <label for="password" > Password</label>
+      <%= password_input form, :password, id: :password, class: "form-control", placeholder: "Password" %><br>
+
+      <label for="game" > Choose a Game</label><br>
+      <%= radio_button form, :game, "Checkers" %> <%= label form, :game_Checkers, "Checkers"%><br>
+      <%= radio_button form, :game, "Chess" %> <%= label form, :game_Chess, "Chess"%><br>
+      <%= radio_button form, :game, "Stratego" %> <%= label form, :game_Stratego, "Stratego"%><br><br>
+
+      <%= submit "Create Room" %>
+
+      <% end) %>
+
+    </div>
   </div>
 </div>
