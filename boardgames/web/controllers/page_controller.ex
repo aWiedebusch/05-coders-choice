@@ -4,4 +4,8 @@ defmodule Boardgames.PageController do
   def index(conn, _params) do
     render conn, "index.html"
   end
+
+  def create(conn, %{ "room" => %{ "name" => name, "game" => game, "password" => password}}) do
+    RoomServer.add(name, game, password)
+  end
 end
