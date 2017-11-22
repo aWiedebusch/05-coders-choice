@@ -3,7 +3,9 @@ defmodule RoomServer.GameRoom do
 
     def new_room(name, game, password) do
         Agent.update(RoomServer.RoomState, fn state ->
-                     [ [{name, game, password}] | state ] end)
+                     
+                        state ++ [%{name: name, game: game, password: password, joinable: "Yes"}]
+                    end)
     end
 
     def list_rooms() do

@@ -16,18 +16,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Example1</td>
-              <td>Checkers</td>
-              <td>No</td>
-              <td><%= submit "Join"%></td>
-            </tr>
-            <tr>
-              <td>Example2</td>
-              <td>Chess</td>
-              <td>Yes</td>
-              <td><%= submit "Join"%></td>
-            </tr>
             <%= for [name, game, joinable] <- @rooms do %>
             <tr>
               <td><%= name %></td>
