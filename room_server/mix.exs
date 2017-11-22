@@ -15,7 +15,12 @@ defmodule RoomServer.Mixfile do
   def application do
     [
       extra_applications: [:logger],
-      mod: {RoomServer.Application, []}
+      mod: {RoomServer.Application, [
+        [
+          %{name: "TestRoom", game: :Checkers, password: "pie", joinable: "Yes"},
+          %{name: "CoolPies", game: :Checkers, password: "ravager21", joinable: "Yes"}
+        ]
+      ]}
     ]
   end
 

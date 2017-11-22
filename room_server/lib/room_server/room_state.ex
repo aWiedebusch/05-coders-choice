@@ -1,8 +1,11 @@
 defmodule RoomServer.RoomState do
     
-    defstruct(
-      names: []
-    )
+    use GenServer
+
+    def start_link(args) do
+      Agent.start_link(fn -> args end,
+                       name: RoomServer.RoomState)
+    end
   end
   
   

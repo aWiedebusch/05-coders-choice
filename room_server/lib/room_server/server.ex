@@ -17,4 +17,8 @@ defmodule RoomServer.Server do
         new_room = RoomServer.GameRoom.make_move(name, ori_pos, new_pos)
         { :reply, new_room, new_room }
     end
+
+    def handle_call({:list_rooms}, _from, state) do
+        { :reply, RoomServer.GameRoom.list_rooms(), RoomServer.GameRoom.list_rooms()}
+    end
 end

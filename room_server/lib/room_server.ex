@@ -8,6 +8,10 @@ defmodule RoomServer do
     GenServer.call(__MODULE__, { :new_room, name, game, password })
   end
 
+  def list_rooms() do
+    GenServer.call(__MODULE__, { :list_rooms })
+  end
+
   # def new_game(:checkers) do
   #   GenServer.call(__MODULE__, { :checkers })
   # end
