@@ -7,7 +7,7 @@ defmodule RoomServer.GameSupervisor do
 
     def init(_args) do
         children = [
-            worker(RoomServer.Server, [], restart: :transient)
+            #worker(RoomServer.Server, [], restart: :transient)
         ]
 
         supervise(children, strategy: :one_for_one)

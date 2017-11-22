@@ -1,9 +1,15 @@
 defmodule RoomServer.Server do
     use GenServer
 
+    # @name RoomServer
+
     def init do
         { :ok, [] }
     end
+
+    # def start_link(default \\ []) do
+    #     GenServer.start_link(RoomServer.GameRoom, default, name: @name)
+    # end
 
 
 ########################################################################

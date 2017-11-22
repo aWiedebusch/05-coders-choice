@@ -5,11 +5,17 @@ defmodule RoomServer.Application do
 
   def start(_type, _args) do
 
+    import Supervisor.Spec, warn: false
+
     children = [
-      supervisor(RoomServer.GameSupervisor, [])
+      #supervisor(RoomServer.GameSupervisor, [])
+      worker(RoomServer, [])
     ]
 
-    opts = [strategy: :one_for_one, name: RoomServer.Supervisor]
+    opts = [
+      strategy: :one_for_one,
+      restart: :transient,
+      name: RoomServer.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end
