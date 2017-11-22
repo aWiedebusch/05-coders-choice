@@ -8,19 +8,13 @@ defmodule RoomServer.Server do
 
 ########################################################################
 
-    def handle_call(:checkers, _from, state) do
-        { :reply, RoomServer.Checkers.new_game(), state }
+    def handle_call( {name, game, password}, _from, _state ) do
+        new_room = RoomServer.GameRoom.new_room(name, game, password)
+        { :reply, new_room, new_room }
     end
 
-    def handle_call(:chess, _from, state) do
-        { :reply, RoomServer.Chess.new_game(), state }
+    def handle_call({:make_move, name, ori_pos, new_pos}, _from, state) do
+        new_room = RoomServer.GameRoom.make_move(name, ori_pos, new_pos)
+        { :reply, new_room, new_room }
     end
-
-    def handle_call(:stratego, _from, state) do
-        { :reply, RoomServer.Stratego.new_game(), state }
-    end
-
-    # def handle_call({:make_move, new_pos}, _from, state) do
-    #     { :reply, RoomServer.Checkers.new_game(), state }
-    # end
 end
