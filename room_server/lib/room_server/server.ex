@@ -8,7 +8,7 @@ defmodule RoomServer.Server do
 
 ########################################################################
 
-    def handle_call( {name, game, password}, _from, _state ) do
+    def handle_call( {:new_room, name, game, password}, _from, _state ) do
         new_room = RoomServer.GameRoom.new_room(name, game, password)
         { :reply, new_room, new_room }
     end

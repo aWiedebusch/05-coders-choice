@@ -1,7 +1,7 @@
 defmodule RoomServer.RoomState do
     
     defstruct(
-      rooms: MapSet.new([])
+      names: []
     )
   end
   
