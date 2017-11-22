@@ -2,7 +2,7 @@ defmodule Boardgames.PageController do
   use Boardgames.Web, :controller
 
   def index(conn, _params) do
-    render conn, "index.html"
+    render conn, "index.html", rooms: RoomServer.list_rooms
   end
 
   def create(conn, %{ "room" => %{ "name" => name, "game" => game, "password" => password}}) do

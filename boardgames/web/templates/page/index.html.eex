@@ -28,6 +28,14 @@
               <td>Yes</td>
               <td><%= submit "Join"%></td>
             </tr>
+            <%= for [name, game, joinable] <- @rooms do %>
+            <tr>
+              <td><%= name %></td>
+              <td><%= game %></td>
+              <td><%= joinable %></td>
+              <td><%= submit "Join"%></td>
+            </tr>
+            <%= end %>
           </tbody>
         </table>
 
