@@ -11,4 +11,9 @@ defmodule Boardgames.PageController do
     |> put_flash(:info, "Added: #{name}")
     |> redirect(to: page_path(conn, :index))
   end
+
+  def show(conn, %{ "id" => id }) do
+    room = RoomServer.find(id)
+    render(conn, "show.html", room: room)
+  end
 end

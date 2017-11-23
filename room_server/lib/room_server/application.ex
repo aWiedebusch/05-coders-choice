@@ -8,9 +8,9 @@ defmodule RoomServer.Application do
     import Supervisor.Spec, warn: false
 
     children = [
-      #supervisor(RoomServer.GameSupervisor, [])
       worker(RoomServer.RoomState, args, restart: :permanent),
       worker(RoomServer, [], restart: :transient)
+      #supervisor(RoomServer.GameSupervisor, [])
     ]
 
     opts = [

@@ -18,12 +18,11 @@
           <tbody>
             <%= for [name, game, joinable] <- @rooms do %>
             <tr>
-              <td><%= name %></td>
+              <td><%= link(name, to: page_path(@conn, :show, name)) %></td>
               <td><%= game %></td>
               <td><%= joinable %></td>
-              <td><%= submit "Join"%></td>
             </tr>
-            <%= end %>
+            <% end %>
           </tbody>
         </table>
 

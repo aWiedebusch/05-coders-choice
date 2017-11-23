@@ -14,11 +14,16 @@ defmodule RoomServer.Server do
     end
 
     def handle_call({:make_move, name, ori_pos, new_pos}, _from, state) do
-        new_room = RoomServer.GameRoom.make_move(name, ori_pos, new_pos)
-        { :reply, new_room, new_room }
+        next_state = RoomServer.GameRoom.make_move(name, ori_pos, new_pos)
+        { :reply, next_state, next_state }
     end
 
-    def handle_call({:list_rooms}, _from, state) do
+    def handle_call({:list_rooms}, _from, _state) do
         { :reply, RoomServer.GameRoom.list_rooms(), RoomServer.GameRoom.list_rooms()}
     end
+
+    def handle_call({:find_room, name}, _from, _state) do
+        { :reply, RoomServer.GameRoom.find(name), RoomServer.GameRoom.find(name)}
+    end
+
 end

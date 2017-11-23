@@ -1,0 +1,19 @@
+
+
+<div class="row">
+
+    <h2><%= @room.name %></h2>
+
+    <div class="container text-center">
+        Board Coming Soon...
+
+        <%= for x <- 0..8 do %>
+            <div class="board-row">
+                <%= for x <- 0..8 do %>
+                    <span class="square">n</span>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+
+</div>
