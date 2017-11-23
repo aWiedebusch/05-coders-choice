@@ -7,13 +7,22 @@
     <div class="container text-center">
         Board Coming Soon...
 
-        <%= for x <- 0..8 do %>
-            <div class="board-row">
-                <%= for x <- 0..8 do %>
-                    <span class="square">n</span>
-                <% end %>
-            </div>
-        <% end %>
+        <div class="top-margin">
+            <%= for x <- 0..3 do %>
+                <div class="board-row">
+                    <%= for x <- 0..3 do %>
+                        <span class="square-black"></span>
+                        <span class="square-white"></span>
+                    <% end %>
+                </div>
+                <div class="board-row">
+                    <%= for x <- 0..3 do %>
+                        <span class="square-white"></span>
+                        <span class="square-black"></span>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
     </div>
 
 </div>

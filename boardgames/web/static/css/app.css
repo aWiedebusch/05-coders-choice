@@ -10,6 +10,24 @@
     max-width: 1920px !important;
 }
 
-.square {
-    margin: 10px !important;
+.square-white {
+    margin: 0px !important;
+    padding: 35px !important;
+    background-color: blue !important;
+}
+
+.square-black {
+    margin: 0px !important;
+    padding: 35px !important;
+    background-color: black !important;
+}
+
+.top-margin {
+    margin-top: 25px !important;
+}
+
+.board-row {
+    padding: 35px !important;
+    margin: 0px !important;
+    line-height: 16.5px !important;
 }
