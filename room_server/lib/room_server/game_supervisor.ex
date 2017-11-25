@@ -6,10 +6,13 @@ defmodule RoomServer.GameSupervisor do
     end
 
     def init(_args) do
+
+        import Supervisor.Spec, warn: false
+
         children = [
-            #worker(RoomServer.Server, [], restart: :transient)
+            worker(RoomServer.GameState, [], restart: :permanent)
         ]
 
-        supervise(children, strategy: :one_for_one)
+        supervise(children, strategy: :rest_for_one)
     end
 end

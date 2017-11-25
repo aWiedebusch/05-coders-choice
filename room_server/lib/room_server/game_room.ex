@@ -1,5 +1,6 @@
 defmodule RoomServer.GameRoom do
 
+alias RoomServer.Checkers, as: Checkers
 
     def new_room(name, game, password) do
         Agent.update(RoomServer.RoomState, fn state ->
@@ -10,7 +11,7 @@ defmodule RoomServer.GameRoom do
                         game: game, 
                         password: password, 
                         joinable: "Yes",
-                        board_state: :initializing
+                        board_state: new_game(name, game)
                     }
                 ]
             end)
@@ -28,10 +29,6 @@ defmodule RoomServer.GameRoom do
         end)
     end
 
-    def make_move(name, ori_pos, new_pos) do
-        
-    end
-
     def find(name) do
         Agent.get(RoomServer.RoomState, fn state ->
 
@@ -39,6 +36,16 @@ defmodule RoomServer.GameRoom do
                 room.name == name
             end)
         end)
+    end
+
+    ##################################################
+
+    def new_game(name,:Checkers) do
+        Checkers.new_game(name)
+    end
+
+    def make_move(name, ori_pos, new_pos) do
+        Checkers.make_move(name, ori_pos, new_pos)
     end
 
 end
