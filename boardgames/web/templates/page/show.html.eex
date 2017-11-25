@@ -12,14 +12,14 @@
                 <%= for row <- 0..3 do %>
                     <div class="board-row">
                         <%= for col <- 0..3 do %>
-                            <%= tag(:span, id: Enum.join([2 * row, col]), class: "square-black")%></span>
+                            <%= tag(:span, id: Enum.join([2 * row, col]), class: "square-black")%><%= tag(:img, id: Enum.join([2 * row, col]), src: "/images/blueCircle.png")%></span>
                             <%= tag(:span, id: :bad_square, class: "square-white")%></span>
                         <% end %>
                     </div>
                     <div class="board-row">
                         <%= for col <- 0..3 do %>
                             <%= tag(:span, id: :bad_square, class: "square-white")%></span>
-                            <%= tag(:span, id: Enum.join([2 * row + 1, col]), class: "square-black")%></span>
+                            <%= tag(:span, id: Enum.join([2 * row + 1, col]), class: "square-black")%><%= tag(:img, id: Enum.join([2 * row + 1, col]), src: "/images/blueCircle.png")%></span>
                         <% end %>
                     </div>
                 <% end %>

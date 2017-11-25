@@ -13,12 +13,19 @@
 .square-white {
     margin: 0px !important;
     padding: 35px !important;
+    height: 35px !important;
+    width: 35px !important;
+    box-sizing: border-box !important;
     background-color: blue !important;
 }
 
 .square-black {
     margin: 0px !important;
     padding: 35px !important;
+    max-height: 35px !important;
+    max-width: 35px !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
     background-color: black !important;
 }
 
@@ -27,7 +34,21 @@
 }
 
 .board-row {
-    padding: 35px !important;
     margin: 0px !important;
     line-height: 16.5px !important;
+    display: inline-flex !important
 }
+
+img {
+    top: 50% !important;
+    left: 50% !important;
+    margin-left: -17px !important;
+    margin-top: -17px !important;
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 60% !important;
+}
+
+/* .checker-blue {
+    image url("/assets/images/blueCircle.png") !important;
+} */
