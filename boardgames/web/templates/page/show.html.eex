@@ -8,19 +8,21 @@
         Board Coming Soon...
 
         <div class="top-margin">
-            <%= for x <- 0..3 do %>
-                <div class="board-row">
-                    <%= for x <- 0..3 do %>
-                        <span class="square-black"></span>
-                        <span class="square-white"></span>
-                    <% end %>
-                </div>
-                <div class="board-row">
-                    <%= for x <- 0..3 do %>
-                        <span class="square-white"></span>
-                        <span class="square-black"></span>
-                    <% end %>
-                </div>
+            <%= if(@room.game == :Checkers) do %>
+                <%= for row <- 0..3 do %>
+                    <div class="board-row">
+                        <%= for col <- 0..3 do %>
+                            <%= tag(:span, id: Enum.join([2 * row, col]), class: "square-black")%></span>
+                            <%= tag(:span, class: "square-white")%></span>
+                        <% end %>
+                    </div>
+                    <div class="board-row">
+                        <%= for col <- 0..3 do %>
+                            <%= tag(:span, class: "square-white")%></span>
+                            <%= tag(:span, id: Enum.join([2 * row + 1, col]), class: "square-black")%></span>
+                        <% end %>
+                    </div>
+                <% end %>
             <% end %>
         </div>
     </div>
