@@ -1,12 +1,12 @@
 <div class="row">
 
     <h2><%= @room.name %></h2>
-    <% {:ok, unwrapped_state} = Map.fetch(@room.board_state, @room.name) %>
 
     <div class="container text-center">
 
         <div class="top-margin">
             <%= if(@room.game == "Checkers") do %>
+            <% {:ok, unwrapped_state} = Map.fetch(@room.board_state, @room.name) %>
                 <%= for row <- 0..3 do %>
                     <div class="board-row">
                         <%= for col <- 0..3 do %>
