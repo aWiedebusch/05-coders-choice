@@ -60,14 +60,14 @@ defmodule RoomServer.Checkers do
 
         Agent.get_and_update(RoomServer.GameState,
             fn state ->
-                {:ok, moved_room} = Map.fetch(state, name)
+                {:ok, moved_board} = Map.fetch(state, name)
                 
-                moved_room = Map.replace(moved_room, new_pos, color)
-                moved_room = Map.replace(moved_room, ori_pos, :empty)
+                moved_board = Map.replace(moved_board, new_pos, color)
+                moved_board = Map.replace(moved_board, ori_pos, :empty)
 
-                Map.replace(state, name, moved_room)
+                Map.replace(state, name, moved_board)
 
-                {{:good_move, moved_room}, moved_room}
+                {{:good_move, moved_board}, moved_board}
             end
         )
     end
@@ -79,7 +79,7 @@ defmodule RoomServer.Checkers do
         {ori_row, ori_col, new_row, new_col} = pos_to_int(ori_pos, new_pos)
 
         blue_row_check(ori_row < new_row)
-            |> blue_move(rem(ori_row, 2), ori_col, new_col)
+            |> b_col_check(rem(ori_row, 2), ori_col, new_col)
 
     end
 
@@ -87,7 +87,7 @@ defmodule RoomServer.Checkers do
         {ori_row, ori_col, new_row, new_col} = pos_to_int(ori_pos, new_pos)
 
         pink_row_check(ori_row > new_row)
-            |> pink_move(rem(ori_row, 2), ori_col, new_col)
+            |> p_col_check(rem(ori_row, 2), ori_col, new_col)
     end
 
     defp pos_to_int(ori_pos, new_pos) do
@@ -113,13 +113,13 @@ defmodule RoomServer.Checkers do
     defp blue_row_check(true),                       do: :ok
     defp blue_row_check(false),                      do: :bad_move
 
-    defp pink_move(:ok, 0, ori_col, new_col),        do: can_plus_one(new_col == (ori_col || ori_col + 1))
-    defp pink_move(:ok, 1, ori_col, new_col),        do: can_minus_one(new_col == (ori_col || ori_col - 1))
-    defp pink_move(:bad_move,_, _ori_col, _new_col), do: :bad_move
+    defp p_col_check(:ok, 0, ori_col, new_col),        do: can_plus_one(new_col == (ori_col || ori_col + 1))
+    defp p_col_check(:ok, 1, ori_col, new_col),        do: can_minus_one(new_col == (ori_col || ori_col - 1))
+    defp p_col_check(:bad_move,_, _ori_col, _new_col), do: :bad_move
 
-    defp blue_move(:ok, 0, ori_col, new_col),        do: can_minus_one(new_col == (ori_col || ori_col - 1))
-    defp blue_move(:ok, 1, ori_col, new_col),        do: can_plus_one(new_col == (ori_col || ori_col + 1))
-    defp blue_move(:bad_move,_, _ori_col, _new_col), do: :bad_move
+    defp b_col_check(:ok, 0, ori_col, new_col),        do: can_minus_one(new_col == (ori_col || ori_col - 1))
+    defp b_col_check(:ok, 1, ori_col, new_col),        do: can_plus_one(new_col == (ori_col || ori_col + 1))
+    defp b_col_check(:bad_move,_, _ori_col, _new_col), do: :bad_move
 
     defp can_plus_one(true),                         do: :good_move
     defp can_plus_one(false),                        do: :bad_move

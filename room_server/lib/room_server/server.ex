@@ -13,7 +13,7 @@ defmodule RoomServer.Server do
         { :reply, new_room, new_room }
     end
 
-    def handle_call({:make_move, name, ori_pos, new_pos, color}, _from, state) do
+    def handle_call({:make_move, name, ori_pos, new_pos, color}, _from, _state) do
         next_state = RoomServer.GameRoom.make_move(name, ori_pos, new_pos, color)
         { :reply, next_state, next_state }
     end

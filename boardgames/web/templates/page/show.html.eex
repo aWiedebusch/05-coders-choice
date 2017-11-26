@@ -1,24 +1,45 @@
-
-
 <div class="row">
 
     <h2><%= @room.name %></h2>
+    <% {:ok, unwrapped_state} = Map.fetch(@room.board_state, @room.name) %>
 
     <div class="container text-center">
 
         <div class="top-margin">
-            <%= if(@room.game == :Checkers) do %>
+            <%= if(@room.game == "Checkers") do %>
                 <%= for row <- 0..3 do %>
                     <div class="board-row">
                         <%= for col <- 0..3 do %>
-                            <%= tag(:span, id: Enum.join([2 * row, col]), class: "square-black")%><%= tag(:img, id: Enum.join([2 * row, col]), src: "/images/blueCircle.png")%></span>
-                            <%= tag(:span, id: :bad_square, class: "square-white")%></span>
+                        <% {:ok, piece} = Map.fetch(unwrapped_state, Enum.join([2 * row, col]))%>
+                            <%= if(piece == :blue) do %>
+                                <%= tag(:span, id: Enum.join([2 * row, col]), class: "square-black")%><%= tag(:img, src: "/images/blueCircle.png")%></span>
+                                <%= tag(:span, id: :bad_square, class: "square-white")%></span>
+                            <% end %>
+                            <%= if(piece == :pink) do %>
+                                <%= tag(:span, id: Enum.join([2 * row, col]), class: "square-black")%><%= tag(:img, src: "/images/pinkCircle.png")%></span>
+                                <%= tag(:span, id: :bad_square, class: "square-white")%></span>
+                            <% end %>
+                            <%= if(piece == :empty) do %>
+                                <%= tag(:span, id: Enum.join([2 * row, col]), class: "square-black")%></span>
+                                <%= tag(:span, id: :bad_square, class: "square-white")%></span>
+                            <% end %>
                         <% end %>
                     </div>
                     <div class="board-row">
                         <%= for col <- 0..3 do %>
-                            <%= tag(:span, id: :bad_square, class: "square-white")%></span>
-                            <%= tag(:span, id: Enum.join([2 * row + 1, col]), class: "square-black")%><%= tag(:img, id: Enum.join([2 * row + 1, col]), src: "/images/blueCircle.png")%></span>
+                        <% {:ok, piece} = Map.fetch(unwrapped_state, Enum.join([2 * row + 1, col]))%>
+                            <%= if(piece == :blue) do %>
+                                <%= tag(:span, id: :bad_square, class: "square-white")%></span>
+                                <%= tag(:span, id: Enum.join([2 * row + 1, col]), class: "square-black")%><%= tag(:img, src: "/images/blueCircle.png")%></span>
+                            <% end %>
+                            <%= if(piece == :pink) do %>
+                                <%= tag(:span, id: :bad_square, class: "square-white")%></span>
+                                <%= tag(:span, id: Enum.join([2 * row + 1, col]), class: "square-black")%><%= tag(:img, src: "/images/pinkCircle.png")%></span>
+                            <% end %>
+                            <%= if(piece == :empty) do %>
+                                <%= tag(:span, id: :bad_square, class: "square-white")%></span>
+                                <%= tag(:span, id: Enum.join([2 * row + 1, col]), class: "square-black")%></span>
+                            <% end %>
                         <% end %>
                     </div>
                 <% end %>

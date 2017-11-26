@@ -40,7 +40,7 @@ alias RoomServer.Checkers, as: Checkers
 
     ##################################################
 
-    def new_game(name,:Checkers) do
+    def new_game(name,"Checkers") do
         Checkers.new_game(name)
     end
 
