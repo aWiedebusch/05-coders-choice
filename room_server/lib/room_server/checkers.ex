@@ -48,8 +48,84 @@ defmodule RoomServer.Checkers do
         )
     end
 
-    def make_move(name, ori_pos, new_pos) do
-        
+    def make_move(name, ori_pos, new_pos, color) do
+
+        move(name, ori_pos, new_pos, color, legal(ori_pos, new_pos, color))
+
     end
+
+###########################################################
+
+    defp move(name, ori_pos, new_pos, color, :good_move) do
+
+        Agent.get_and_update(RoomServer.GameState,
+            fn state ->
+                {:ok, moved_room} = Map.fetch(state, name)
+                
+                moved_room = Map.replace(moved_room, new_pos, color)
+                moved_room = Map.replace(moved_room, ori_pos, :empty)
+
+                Map.replace(state, name, moved_room)
+
+                {{:good_move, moved_room}, moved_room}
+            end
+        )
+    end
+    defp move(_name, _ori_pos, _new_pos, _color, :bad_move) do
+        {:bad_move, Agent.get(RoomServer.GameState, fn state -> state end)}
+     end
+
+    defp legal(ori_pos, new_pos, :blue) do
+        {ori_row, ori_col, new_row, new_col} = pos_to_int(ori_pos, new_pos)
+
+        blue_row_check(ori_row < new_row)
+            |> blue_move(rem(ori_row, 2), ori_col, new_col)
+
+    end
+
+    defp legal(ori_pos, new_pos, :pink) do
+        {ori_row, ori_col, new_row, new_col} = pos_to_int(ori_pos, new_pos)
+
+        pink_row_check(ori_row > new_row)
+            |> pink_move(rem(ori_row, 2), ori_col, new_col)
+    end
+
+    defp pos_to_int(ori_pos, new_pos) do
+        ori_row = ori_pos
+                  |> String.at(0)
+                  |> String.to_integer()
+        ori_col = ori_pos
+                  |> String.at(1)
+                  |> String.to_integer()
+        new_row = new_pos
+                  |> String.at(0)
+                  |> String.to_integer()
+        new_col = new_pos
+                  |> String.at(1)
+                  |> String.to_integer()
+
+        {ori_row, ori_col, new_row, new_col}
+    end
+
+    defp pink_row_check(true),                       do: :ok
+    defp pink_row_check(false),                      do: :bad_move
+
+    defp blue_row_check(true),                       do: :ok
+    defp blue_row_check(false),                      do: :bad_move
+
+    defp pink_move(:ok, 0, ori_col, new_col),        do: can_plus_one(new_col == (ori_col || ori_col + 1))
+    defp pink_move(:ok, 1, ori_col, new_col),        do: can_minus_one(new_col == (ori_col || ori_col - 1))
+    defp pink_move(:bad_move,_, _ori_col, _new_col), do: :bad_move
+
+    defp blue_move(:ok, 0, ori_col, new_col),        do: can_minus_one(new_col == (ori_col || ori_col - 1))
+    defp blue_move(:ok, 1, ori_col, new_col),        do: can_plus_one(new_col == (ori_col || ori_col + 1))
+    defp blue_move(:bad_move,_, _ori_col, _new_col), do: :bad_move
+
+    defp can_plus_one(true),                         do: :good_move
+    defp can_plus_one(false),                        do: :bad_move
+
+    defp can_minus_one(true),                        do: :good_move
+    defp can_minus_one(false),                       do: :bad_move
+
 
 end

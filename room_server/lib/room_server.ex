@@ -15,5 +15,9 @@ defmodule RoomServer do
   def find(name) do
     GenServer.call(__MODULE__, { :find_room, name })
   end
+
+  def make_move(name, ori_pos, new_pos, color) do
+    GenServer.call(__MODULE__, { :make_move, name, ori_pos, new_pos, color })
+  end
   
 end

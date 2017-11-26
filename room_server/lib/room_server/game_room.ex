@@ -44,8 +44,8 @@ alias RoomServer.Checkers, as: Checkers
         Checkers.new_game(name)
     end
 
-    def make_move(name, ori_pos, new_pos) do
-        Checkers.make_move(name, ori_pos, new_pos)
+    def make_move(name, ori_pos, new_pos, color) do
+        Checkers.make_move(name, ori_pos, new_pos, color)
     end
 
 end
