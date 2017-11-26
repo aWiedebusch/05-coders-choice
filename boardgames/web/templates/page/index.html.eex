@@ -34,8 +34,9 @@
 
     <div class="col-lg-5 panel panel-info">
       <div class="panel-heading">
-        <h4>Create your own Game</h4>
+        <h4>Create your own Room</h4>
       </div>
+      <h5>(Please fill out at least Room Name and what Game to play)</h5>
       <div class="panel-body">
         <%= form_for(@conn, page_path(@conn, :create), [as: :room], fn form -> %>
         <div class="form-group">
